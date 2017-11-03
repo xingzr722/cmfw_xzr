@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzr.dao.AlbumDAO">
+    <insert id="save" parameterType="com.xzr.entity.Album">
+        insert into t_album values(#{id},#{imgPath},#{name},#{setCount},#{createTime},#{score},#{author},#{broadcast},#{brief},#{status})
+    </insert>
+    <update id="update" parameterType="com.xzr.entity.Album">
+        update t_album set status=#{status} where id=#{id}
+    </update>
+    <select id="queryAll" resultType="com.xzr.entity.Album">
+        select id,imgPath,name,setCount,createTime,score,author,broadcast,brief,status from t_album
+    </select>
+    <resultMap id="albumResultMap" type="com.xzr.entity.Album">
+        <id column="id" property="id"/>
+        <result column="imgPath" property="imgPath"/>
+        <result column="name" property="name"/>
+        <result column="setCount" property="setCount"/>
+        <result column="createTime" property="createTime"/>
+        <result column="score" property="score"/>
+        <result column="author" property="author"/>
+        <result column="broadcast" property="broadcast"/>
+        <result column="brief" property="brief"/>
+        <result column="status" property="status"/>
+        <collection property="children" javaType="list" ofType="com.xzr.entity.Chapter">
+            <id column="cid" property="id"/>
+            <result column="cname" property="name"/>
+            <result column="download" property="download"/>
+            <result column="size" property="size"/>
+            <result column="duration" property="duration"/>
+        </collection>
+    </resultMap>
+    <select id="queryByPage" resultMap="albumResultMap">
+        select a.id,a.imgPath,a.name,a.setCount,a.createTime,a.score,a.author,a.broadcast,a.brief,a.status,
+        c.id cid,c.name cname,c.download,c.size,c.duration
+        from t_album a
+        left join t_chapter c
+        on a.id=c.albumid
+        limit ${pageNow},${pageNum}
+    </select>
+
+</mapper>

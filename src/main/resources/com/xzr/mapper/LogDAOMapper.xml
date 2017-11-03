@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzr.dao.LogDAO">
+    <select id="queryAll" resultType="com.xzr.entity.Log">
+        select * from t_log
+    </select>
+    <select id="queryByPage" resultType="com.xzr.entity.Log">
+        select * from t_log limit ${pageNow},${pageNum}
+    </select>
+    <insert id="save" parameterType="com.xzr.entity.Log">
+        insert into t_log values(#{id},#{username},#{doSomething},#{date},#{status})
+    </insert>
+</mapper>

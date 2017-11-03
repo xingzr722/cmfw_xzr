@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzr.dao.ChapterDAO">
+    <insert id="save" parameterType="com.xzr.entity.Chapter">
+        insert into t_chapter values(#{id},#{name},#{download},#{size},#{duration},#{album.id},#{status})
+    </insert>
+    <update id="update" parameterType="com.xzr.entity.Chapter">
+        update t_chapter set status=#{status} where id=#{id}
+    </update>
+    <select id="queryAll" resultType="com.xzr.entity.Chapter">
+        select * from t_chapter
+    </select>
+    <select id="queryByPage" resultType="com.xzr.entity.Chapter">
+        select * from t_chapter limit ${pageNow},${pageNum}
+    </select>
+</mapper>

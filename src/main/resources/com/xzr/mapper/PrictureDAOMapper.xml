@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzr.dao.PictureDAO">
+    <insert id="save" parameterType="com.xzr.entity.Picture">
+        insert into t_picture values(#{id},#{name},#{describe},#{status},#{creattime})
+    </insert>
+    <update id="update" parameterType="com.xzr.entity.Picture">
+        update t_picture set status=#{status} where id=#{id}
+    </update>
+    <select id="queryAll" resultType="com.xzr.entity.Picture">
+        select * from t_picture
+    </select>
+    <select id="queryPage" resultType="com.xzr.entity.Picture">
+        select * from t_picture limit #{begin},#{end}
+    </select>
+    <select id="count" resultType="Integer">
+        select count(*) from t_picture
+    </select>
+    <delete id="delete" parameterType="String">
+        delete from t_picture where id=#{id}
+    </delete>
+</mapper>

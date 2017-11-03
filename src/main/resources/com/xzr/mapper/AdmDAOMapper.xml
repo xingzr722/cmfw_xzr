@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzr.dao.AdmDAO">
+    <select id="queryOne" resultType="com.xzr.entity.Adm" parameterType="String">
+        select * from t_adm where username=#{username}
+    </select>
+    <update id="update" parameterType="com.xzr.entity.Adm">
+        update t_adm set password=#{password} where id=#{id}
+    </update>
+</mapper>

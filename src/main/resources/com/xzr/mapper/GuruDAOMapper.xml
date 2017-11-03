@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzr.dao.GuruDAO">
+    <insert id="save" parameterType="com.xzr.entity.Guru">
+        insert into t_guru values(#{id},#{headpic},#{name},#{status})
+    </insert>
+    <update id="update" parameterType="com.xzr.entity.Guru">
+        update t_guru set status=#{status} where id=#{id}
+    </update>
+    <select id="queryAll" resultType="com.xzr.entity.Guru">
+        select * from t_guru
+    </select>
+    <select id="queryByPage" resultType="com.xzr.entity.Guru">
+        select * from t_guru limit #{pageNow},#{pageNum}
+    </select>
+</mapper>

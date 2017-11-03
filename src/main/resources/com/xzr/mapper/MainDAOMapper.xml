@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzr.dao.MainDAO">
+    <select id="queryAllPicture" resultType="com.xzr.entity.Picture">
+        select * from t_picture
+    </select>
+
+    <select id="queryAllAlbum" resultType="com.xzr.entity.Album">
+        select * from t_album
+    </select>
+
+    <resultMap id="articleResultMap" type="com.xzr.entity.Article">
+        <id column="aid" property="id"/>
+        <result column="atitle" property="title"/>
+        <result column="acreattime" property="creattime"/>
+        <result column="alink" property="link"/>
+        <result column="aext" property="ext"/>
+        <result column="atext" property="text"/>
+        <result column="aillustration" property="illustration"/>
+        <association property="guru" javaType="com.xzr.entity.Guru">
+            <id column="gid" property="id"/>
+            <result column="gheadpic" property="headpic"/>
+            <result column="gname" property="name"/>
+            <result column="gstatus" property="status"/>
+        </association>
+    </resultMap>
+    <select id="queryAllArticle" resultMap="articleResultMap">
+        select a.id aid,a.title atitle,a.creattime acreattime,a.link alink,a.ext aext,a.text atext,a.illustration aillustration,
+               g.id gid,g.headpic gheadpic,g.name gname,g.status gstatus
+        from t_article a
+        left join t_guru g
+        on a.guruid = g.id
+    </select>
+
+    <select id="queryByPhone" resultType="com.xzr.entity.User" parameterType="String">
+        select * from t_user where phone=#{phone}
+    </select>
+</mapper>
